@@ -101,6 +101,4 @@ class ButtDetector:
 
 if __name__ == '__main__':
     ButtDetector().detect_butts(
-        images=["/media/main/Data/Task/RPiCigDetector/training_data/cig_butts/images/image0.jpg",
-                "/media/main/Data/Task/RPiCigDetector/training_data/cig_butts/images/image4.jpg",
-                "/media/main/Data/Task/RPiCigDetector/training_data/cig_butts/images/image6.jpg"])
+        images=[])
