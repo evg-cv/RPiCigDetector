@@ -1,0 +1,4 @@
+opencv-python~=4.2.0.34
+tensorflow~=1.13.1
+numpy~=1.19.5
+imutils~=0.5.4
