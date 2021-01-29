@@ -43,7 +43,7 @@ The GUI of this project is designed with Kivy.
 
 - Environment
 
-    Ubuntu 18.04/Raspbian OS, Python 3.6
+    Ubuntu 18.04/Raspbian OS(Full, 32bit), Python 3.6
 
 - Installation on Raspberry Pi
 

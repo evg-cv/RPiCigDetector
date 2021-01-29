@@ -41,7 +41,7 @@ class ButtDetector:
 
     def detect_butts(self, frame, count_ret=False):
         if count_ret:
-            st_time = time.time()
+            # st_time = time.time()
             image_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             im_h, im_w, _ = frame.shape
             image_resized = cv2.resize(image_rgb, (self.width, self.height))
@@ -79,9 +79,9 @@ class ButtDetector:
             elif self.butt_nums != 0 and detected_butts == 0:
                 self.butt_nums = detected_butts
                 self.detected_status = False
-            elif self.butt_nums != 0 and self.detected_status == detected_butts:
+            elif self.butt_nums != 0 and self.butt_nums == detected_butts:
                 self.detected_status = False
-            print(f"[INFO] Processing Time: {time.time() - st_time}")
+            # print(f"[INFO] Processing Time: {time.time() - st_time}")
 
         cv2.putText(frame, f"The number of Butts: {self.butt_nums}", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 0.7,
                     (0, 255, 0), 2)

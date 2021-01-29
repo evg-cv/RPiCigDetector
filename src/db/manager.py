@@ -34,6 +34,7 @@ class DatabaseManager:
         return query_result
 
     def update_data(self, field, value, id_index):
+        print(id_index)
         self.cursor.execute("SELECT id FROM butt_numbers")
         query_result = self.cursor.fetchall()
         if id_index < 30:
