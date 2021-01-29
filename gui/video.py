@@ -52,6 +52,7 @@ class VideoWidget(Image):
     def __init__(self, **kwargs):
         self._egg_counter_ret = None
         self.butt_detector = ButtDetector()
+        self.count_ids = 0
         super(VideoWidget, self).__init__(**kwargs)
 
     def on_port_num(self, *args):
@@ -107,11 +108,17 @@ class VideoWidget(Image):
                 ret, frame = self._capture.read()
             else:
                 frame = None
-            # counted_frame = self.butt_detector.detect_butts(frame=frame)
-            counted_frame = frame
+            if self.count_ids % 20 == 0:
+                counted_frame = self.butt_detector.detect_butts(frame=frame, count_ret=True)
+            else:
+                counted_frame = self.butt_detector.detect_butts(frame=frame)
+            # counted_frame = frame
         except (cv2.error, AttributeError, ConnectionError):
             counted_frame = None
         self._update_video(origin_frame=counted_frame)
+        self.count_ids += 1
+        if self.count_ids >= 1000:
+            self.count_ids = 0
 
     def _update_video(self, origin_frame, *args):
         """

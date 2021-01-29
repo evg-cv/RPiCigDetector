@@ -7,24 +7,13 @@ from kivy.uix.recyclegridlayout import RecycleGridLayout
 from kivy.uix.behaviors import FocusBehavior
 from kivy.uix.recycleview.layout import LayoutSelectionBehavior
 from kivy.uix.popup import Popup
-from settings import SHOW_DATABASE_SCREEN_PATH
 from src.db.manager import DatabaseManager
+from gui.popup import WarningPopup
+from settings import SHOW_DATABASE_SCREEN_PATH
 
 
 Builder.load_file(SHOW_DATABASE_SCREEN_PATH)
 db_manager = DatabaseManager()
-
-
-class WarningPopup(Popup):
-
-    label = StringProperty()
-
-    def __init__(self, label, **kwargs):
-        super(WarningPopup, self).__init__(**kwargs)
-        self.set_description(label)
-
-    def set_description(self, label):
-        self.label = label
 
 
 class DataAddPopup(Popup):

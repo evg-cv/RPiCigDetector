@@ -59,6 +59,7 @@ sudo python3 -m pip install -U pip
 sudo python3 -m pip install -U setuptools
 sudo python3 -m pip install -U Cython pillow
 sudo python3 -m pip install https://github.com/kivy/kivy/archive/master.zip
+#sudo echo "gpu_mem=1024" | sudo tee -a /boot/config.txt
 
 # Get packages required for OpenCV
 sudo apt-get -y install libjpeg-dev libtiff5-dev libjasper-dev libpng12-dev

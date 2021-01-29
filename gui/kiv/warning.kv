@@ -1,0 +1,16 @@
+<WarningPopup>:
+    id: warn_pop
+    title: "Warning"
+    size_hint: None, None
+    size: 200, 200
+    auto_dismiss: False
+
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            size_hint: 1, 0.7
+            text: root.label
+        Button:
+            size_hint: 1, 0.3
+            text: 'OK'
+            on_press: root.dismiss()

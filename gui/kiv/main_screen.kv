@@ -36,7 +36,7 @@
         BoxLayout:
             orientation: 'horizontal'
             padding: 0, 20, 0, 20
-            size_hint_x: 0.6
+            size_hint_x: 0.7
             size_hint_y: None
             pos_hint : {'center_x':.5, 'center_y':.1}
             height: 70
@@ -60,6 +60,12 @@
                 size_hint_y: None
                 height: 30
                 id: butt_num
+                text: ""
+                font_size: 20
+            Label:
+                size_hint_y: None
+                height: 30
+                id: warn_txt
                 text: ""
                 font_size: 20
                 color: 1, 0, 0, 1
