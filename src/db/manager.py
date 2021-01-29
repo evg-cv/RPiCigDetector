@@ -36,7 +36,10 @@ class DatabaseManager:
     def update_data(self, field, value, id_index):
         self.cursor.execute("SELECT id FROM butt_numbers")
         query_result = self.cursor.fetchall()
-        id_value = query_result[id_index - 30]
+        if id_index < 30:
+            id_value = query_result[id_index]
+        else:
+            id_value = query_result[id_index - 30]
 
         update_sql = "UPDATE butt_numbers SET " + field + " = " + f"'{value}'" + " WHERE id = " + str(id_value[0])
         self.cursor.execute(update_sql)

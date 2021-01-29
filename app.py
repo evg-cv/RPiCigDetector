@@ -44,7 +44,7 @@ class ButtCounterTool(App):
 
     def on_stop(self):
         self.main_screen.db_ret = False
-        # self.main_screen.db_thread.join()
+        self.main_screen.db_thread.join()
         Window.close()
 
 

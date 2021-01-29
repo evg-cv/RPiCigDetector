@@ -6,7 +6,6 @@ from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.screenmanager import Screen
 from src.db.manager import DatabaseManager
-from gui.popup import WarningPopup
 from settings import MAIN_SCREEN_PATH, MAX_BUTT_NUMS
 
 
