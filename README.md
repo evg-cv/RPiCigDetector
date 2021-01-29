@@ -92,6 +92,7 @@ The GUI of this project is designed with Kivy.
         pip3 install -r requirements.txt
         sudo apt-get install libedgetpu1-std
         pip3 install --extra-index-url https://google-coral.github.io/py-repo/ tflite_runtime
+        apt-get install libsdl2-dev libsdl2-ttf-dev libsdl2-image-dev libsdl2-mixer-dev
         sudo apt-get install xclip
     ```
 

@@ -1,5 +1,8 @@
-# import time
+import time
+import threading
 import cv2
+
+from kivy.properties import StringProperty
 from kivy.clock import Clock
 from kivy.properties import NumericProperty, BooleanProperty, ObjectProperty
 from utils.frame_buf import frame_to_buf
@@ -104,7 +107,8 @@ class VideoWidget(Image):
                 ret, frame = self._capture.read()
             else:
                 frame = None
-            counted_frame = self.butt_detector.detect_butts(frame=frame)
+            # counted_frame = self.butt_detector.detect_butts(frame=frame)
+            counted_frame = frame
         except (cv2.error, AttributeError, ConnectionError):
             counted_frame = None
         self._update_video(origin_frame=counted_frame)
@@ -142,3 +146,41 @@ class VideoWidget(Image):
                 self._capture = None
         except AttributeError:
             pass
+
+
+class VideoFileWidget(Image):
+
+    path = StringProperty()
+
+    def __init__(self, **kwargs):
+        super(VideoFileWidget, self).__init__(**kwargs)
+        self._b_stop = threading.Event()
+        self._b_stop.clear()
+        self.frame_thread = None
+
+    def start(self, *args):
+        threading.Thread(target=self._read_file).start()
+
+    def _read_file(self):
+        cap = cv2.VideoCapture(0)
+        cnt = 0
+        while not self._b_stop.is_set():
+            print("running")
+            s_time = time.time()
+            ret, frame = cap.read()
+            cnt += 1
+            if cnt == cap.get(cv2.CAP_PROP_FRAME_COUNT):
+                cnt = 0
+                cap.set(cv2.CAP_PROP_POS_FRAMES, 0)
+            Clock.schedule_once(lambda dt: self._update_frame(frame))
+            time.sleep(max(0., 1 / 30. - time.time() + s_time))
+
+        cap.release()
+
+    def _update_frame(self, frame):
+        texture = frame_to_buf(frame=frame)
+        self.texture = texture
+
+    def stop(self):
+        self._b_stop.set()
+        self.frame_thread.join()
