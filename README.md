@@ -60,30 +60,17 @@ The GUI of this project is designed with Kivy.
     * Please run the following commands in the terminal.
     
     ```
+        sudo apt-get install -y git
         git clone https://github.com/evg-cv/RPiCigDetector.git
-        cd RPiCigDetector
-        sudo pip3 install virtualenv
-        python3 -m venv env
-        source env/bin/activate
-        bash pi_requirements.sh
-        echo "deb https://packages.cloud.google.com/apt coral-edgetpu-stable main" | sudo tee /etc/apt/sources.list.d/coral-edgetpu.list
-        curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-        sudo apt-get update
-        sudo apt-get install libedgetpu1-std
+        cd RPiCigDetector        
+        bash pi_requirements.sh        
     ```
     
-- Database Installation on Raspberry Pi
+- Database Configuration on Raspberry Pi
 
-    * Please run the following commands in the terminal
-    ```
-        sudo apt update
-        sudo apt upgrade
-        sudo apt install mariadb-server
-    ```
-  
     * Please run the following command to begin the MySQL securing process.
     ```
-        sudo mysql_secure_installation
+        sudo mysql_secure_installation         
     ```
   
     * Just follow the prompts to set a password for the root user and to secure your MySQL installation. 
@@ -93,6 +80,8 @@ The GUI of this project is designed with Kivy.
     ```
         sudo mysql -u root -p
         CREATE DATABASE butt_counter;
+        ALTER USER 'root'@'localhost' IDENTIFIED BY 'password';
+        exit
     ```
 
 - Installation on PC
@@ -112,16 +101,8 @@ The GUI of this project is designed with Kivy.
 
 - Please connect USB Coral Accelerator with your PC/Raspberry Pi 4 via USB 3.0 port and web camera with PC/Raspberry Pi.
 
-- Please run the following command in the terminal.
+- Please navigate to this project directory and run the following command in the terminal.
 
     ```
-        python3 app.py
-    ```
-
-- If you restart the Pi, please run the following commands.
-
-    ```
-        cd /home/pi/RPiCigDetector
-        source env/bin/activate
         python3 app.py
     ```

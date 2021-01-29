@@ -44,6 +44,7 @@ class MainScreen(Screen):
                 self.ids.butt_num.text = str(butt_nums)
                 self.ids.time_stamp.text = str(current_tstamp)
                 self.db_manager.insert_data(butt_num=butt_nums, t_stamp=current_tstamp)
+                time.sleep(2)
             time.sleep(0.02)
 
     def close_window(self):
