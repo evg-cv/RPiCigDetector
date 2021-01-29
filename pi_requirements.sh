@@ -88,7 +88,7 @@ pip3 install mysql.connector
 
 #pip3 install tensorflow
 
-version=$(python -c 'import sys; print(".".join(map(str, sys.version_info[:2])))')
+version=$(python3 -c 'import sys; print(".".join(map(str, sys.version_info[:2])))')
 
 if [ "$version" == "3.7" ]; then
 pip3 install https://github.com/google-coral/pycoral/releases/download/release-frogfish/tflite_runtime-2.5.0-cp37-cp37m-linux_armv7l.whl
