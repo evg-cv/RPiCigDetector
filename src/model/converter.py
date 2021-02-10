@@ -5,7 +5,7 @@ import cv2
 import numpy as np
 
 from imutils import paths
-from settings import MODEL_DIR, TRAINING_IMAGES_DIR
+from settings import MODEL_DIR, TRAINING_IMAGES_DIR, CUR_DIR
 
 
 def convert_quantized_tflite_model(frozen_graph_file, tflite_file_path):
@@ -42,13 +42,19 @@ def convert_from_frozen_graph():
     Please use RPiCigDetector/utils/model/mobilenet_v1_1.0_224_frozen.tgz model for testing conversion to TFLite.
     :return:
     """
+    input_arrays = ["input"]
     converter = tf.compat.v1.lite.TFLiteConverter.from_frozen_graph(
-        graph_def_file='',
+        graph_def_file='/media/main/Data/Task/RPiCigDetector/utils/test_model/frozen_inference_graph.pb',
         # both `.pb` and `.pbtxt` files are accepted.
         input_arrays=['input'],
         input_shapes={'input': [1, 224, 224, 3]},
         output_arrays=['MobilenetV1/Predictions/Softmax']
     )
+    converter.allow_custom_ops = True
+    # converter.optimizations = [tf.lite.Optimize.OPTIMIZE_FOR_SIZE]
+    # converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS_INT8]
+    converter.inference_type = tf.lite.constants.QUANTIZED_UINT8
+    converter.quantized_input_stats = {input_arrays[0]: (128, 128)}
     tflite_model = converter.convert()
 
     # Save the model.
@@ -117,5 +123,7 @@ def _representative_dataset_gen():
 
 
 if __name__ == '__main__':
-    convert_quantized_tflite_for_tpu(frozen_graph_file=os.path.join(MODEL_DIR, "butt_tflite_graph.pb"),
-                                     tflite_file_path=os.path.join(MODEL_DIR, "butt_detecter_quantized.tflite"))
+    convert_quantized_tflite_model(frozen_graph_file="/media/main/Data/Task/RPiCigDetector/utils/test_model"
+                                                     "/tflite_graph.pb",
+                                   tflite_file_path=os.path.join(CUR_DIR, "utils", "test_model",
+                                                                 "quantized.tflite"))

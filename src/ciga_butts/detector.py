@@ -1,10 +1,11 @@
 import os
+import glob
 import cv2
 import time
 import numpy as np
 import importlib.util
 
-from settings import THRESHOLD, MODEL_DIR, TPU, INPUT_STD, INPUT_MEAN
+from settings import THRESHOLD, MODEL_DIR, TPU, INPUT_STD, INPUT_MEAN, CUR_DIR
 
 
 pkg = importlib.util.find_spec('tflite_runtime')
@@ -88,7 +89,7 @@ class ButtDetector:
                                 2)  # Draw label text
 
             # All the results have been drawn on the image, now display the image
-            cv2.imshow('Object detector', image)
+            # cv2.imshow('Object detector', image)
             print(f"[INFO] Processing Time: {time.time() - st_time}")
 
             # Press any key to continue to next image, or press 'q' to quit
@@ -101,4 +102,4 @@ class ButtDetector:
 
 if __name__ == '__main__':
     ButtDetector().detect_butts(
-        images=[])
+        images=glob.glob(os.path.join(CUR_DIR, 'test_images', "*.*")))
