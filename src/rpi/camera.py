@@ -1,6 +1,5 @@
 import os
 import cv2
-import time
 import numpy as np
 import importlib.util
 
@@ -55,20 +54,12 @@ class ButtDetector:
             self.interpreter.set_tensor(self.input_details[0]['index'], input_data)
             self.interpreter.invoke()
             scores = self.interpreter.get_tensor(self.output_details[2]['index'])[0]
-            # boxes = self.interpreter.get_tensor(self.output_details[0]['index'])[0]
 
             # Loop over all detections and draw detection box if confidence is above minimum threshold
             detected_butts = 0
             for i in range(len(scores)):
                 if (scores[i] > THRESHOLD) and (scores[i] <= 1.0):
                     detected_butts += 1
-                    # Get bounding box coordinates and draw box Interpreter can return coordinates that are outside
-                    # of image dimensions, need to force them to be within image using max() and min()
-                    # y_min = int(max(1, (boxes[i][0] * im_h)))
-                    # x_min = int(max(1, (boxes[i][1] * im_w)))
-                    # y_max = int(min(im_h, (boxes[i][2] * im_h)))
-                    # x_max = int(min(im_w, (boxes[i][3] * im_w)))
-                    # cv2.rectangle(frame, (x_min, y_min), (x_max, y_max), (10, 255, 0), 2)
 
             if self.butt_nums == 0 and detected_butts > 0:
                 self.butt_nums = detected_butts

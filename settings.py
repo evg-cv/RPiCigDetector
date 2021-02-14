@@ -17,7 +17,7 @@ APP_WIDTH = '1280'
 APP_HEIGHT = '900'
 MAIN_SCREEN = "main_screen"
 SHOW_DATABASE = "show_database"
-TPU = False
+TPU = True
 
 HOST_NAME = 'localhost'
 USER_NAME = 'root'
