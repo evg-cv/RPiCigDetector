@@ -5,6 +5,7 @@ import cv2
 from kivy.properties import StringProperty
 from kivy.clock import Clock
 from kivy.properties import NumericProperty, BooleanProperty, ObjectProperty
+from picamera import PiCamera
 from utils.frame_buf import frame_to_buf
 from kivy.uix.image import Image
 from kivy.logger import Logger
@@ -63,7 +64,9 @@ class VideoWidget(Image):
         :return:
         """
         try:
-            self._capture = cv2.VideoCapture(self.port_num)
+            # self._capture = cv2.VideoCapture(self.port_num)
+            self._capture = PiCamera(framerate=30)
+            self._capture.awb_mode = "fluorescent"
             self._capture.set(cv2.CAP_PROP_FRAME_WIDTH, self.camera_width)
             self._capture.set(cv2.CAP_PROP_FRAME_HEIGHT, self.camera_height)
             self._frame = None
