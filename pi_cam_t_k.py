@@ -7,7 +7,7 @@ from picamera import PiCamera
 
 capture = PiCamera(framerate=30)
 time.sleep(2)
-capture.awb_mode = "fluorescent"
+capture.awb_mode = "sun"
 tmp_path = os.path.join('/tmp', 'temp.jpg')
 
 while True:
