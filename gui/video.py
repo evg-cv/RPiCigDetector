@@ -1,3 +1,4 @@
+import os
 import time
 import threading
 import cv2
@@ -66,7 +67,8 @@ class VideoWidget(Image):
         try:
             # self._capture = cv2.VideoCapture(self.port_num)
             self._capture = PiCamera(framerate=30)
-            self._capture.awb_mode = "fluorescent"
+            time.sleep(2)
+            self._capture.awb_mode = "incandescent"
             self._capture.set(cv2.CAP_PROP_FRAME_WIDTH, self.camera_width)
             self._capture.set(cv2.CAP_PROP_FRAME_HEIGHT, self.camera_height)
             self._frame = None
@@ -106,9 +108,11 @@ class VideoWidget(Image):
         Capture video frame and update image widget
         :return:
         """
+        tmp_path = os.path.join('/tmp', 'temp.jpg')
         try:
             if type(self.port_num) == int:
-                ret, frame = self._capture.read()
+                self._capture.capture(tmp_path)
+                frame = cv2.imread(tmp_path)
             else:
                 frame = None
             if self.count_ids % 20 == 0:
