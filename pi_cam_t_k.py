@@ -1,13 +1,15 @@
 import cv2
+import time
 
-from picamera import PiCamera
+from imutils.video import VideoStream
 
 
-capture = PiCamera(framerate=30)
-capture.awb_mode = "fluorescent"
+cap = VideoStream(usePiCamera=True).start()
+time.sleep(2.0)
+cap.awb_mode = "fluorescent"
 
 while True:
-    frame = capture.capture()
+    frame = cap.read()
     cv2.imshow("Frame", frame)
     if cv2.waitKey(1) & 0xff == ord("q"):
         break
