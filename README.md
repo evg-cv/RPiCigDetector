@@ -51,7 +51,6 @@ The GUI of this project is designed with Kivy.
 
         ```
             sudo apt-get update
-            sudo apt-get dist-upgrade
         ```
     * While we're at it, let's make sure the camera interface is enabled in the Raspberry Pi Configuration menu. 
     Please click the Pi icon in the top left corner of the screen, select Preferences -> Raspberry Pi Configuration, 

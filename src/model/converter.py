@@ -123,7 +123,7 @@ def _representative_dataset_gen():
 
 
 if __name__ == '__main__':
-    convert_quantized_tflite_model(frozen_graph_file="/media/main/Data/Task/RPiCigDetector/utils/test_model"
-                                                     "/tflite_graph.pb",
-                                   tflite_file_path=os.path.join(CUR_DIR, "utils", "test_model",
-                                                                 "quantized.tflite"))
+    convert_quantized_tflite_for_tpu(frozen_graph_file="/media/main/Data/Task/RPiCigDetector/utils/subtitle_model/"
+                                                       "tflite_graph.pb",
+                                     tflite_file_path=os.path.join(CUR_DIR, "utils", "subtitle_model",
+                                                                   "quantized.tflite"))
