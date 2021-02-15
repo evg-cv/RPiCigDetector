@@ -9,7 +9,8 @@ time.sleep(2.0)
 cap.awb_mode = "fluorescent"
 
 while True:
-    _, frame = cap.read()
+    frame = cap.read()
+    frame = cv2.flip(frame, 1)
     cv2.imshow("Frame", frame)
     if cv2.waitKey(1) & 0xff == ord("q"):
         break
