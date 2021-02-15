@@ -54,7 +54,7 @@ sudo adduser "root" render
 sudo apt -f install
 sudo apt install -y pkg-config libgl1-mesa-dev libgles2-mesa-dev python3-setuptools libgstreamer1.0-dev git-core \
     gstreamer1.0-plugins-{bad,base,good,ugly} gstreamer1.0-{omx,alsa} python3-dev python3-pip libmtdev-dev xclip xsel libjpeg-dev libilmbase-dev libopenexr-dev libgstreamer1.0-dev
-sudo apt install python3-sdl2
+sudo apt install -y python3-sdl2
 
 sudo python3 -m pip install -U pip
 sudo python3 -m pip install -U setuptools
