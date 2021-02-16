@@ -56,8 +56,8 @@ class VideoWidget(Image):
         self.butt_detector = ButtDetector()
         self.count_ids = 0
         self._capture = PiCamera(framerate=30)
-        self._capture.awb_mode = "incandescent"
         time.sleep(2)
+        self._capture.awb_mode = "incandescent"
         super(VideoWidget, self).__init__(**kwargs)
 
     def on_port_num(self, *args):
