@@ -56,6 +56,7 @@ class VideoWidget(Image):
         self.butt_detector = ButtDetector()
         self.count_ids = 0
         self._capture = PiCamera(framerate=30)
+        self._capture.awb_mode = "incandescent"
         time.sleep(2)
         super(VideoWidget, self).__init__(**kwargs)
 
@@ -68,7 +69,6 @@ class VideoWidget(Image):
         """
         try:
             # self._capture = cv2.VideoCapture(self.port_num)
-            self._capture.awb_mode = "incandescent"
             self._capture.set(cv2.CAP_PROP_FRAME_WIDTH, self.camera_width)
             self._capture.set(cv2.CAP_PROP_FRAME_HEIGHT, self.camera_height)
             # self._frame = None
