@@ -55,6 +55,8 @@ class VideoWidget(Image):
         self._egg_counter_ret = None
         self.butt_detector = ButtDetector()
         self.count_ids = 0
+        self._capture = PiCamera(framerate=30)
+        time.sleep(2)
         super(VideoWidget, self).__init__(**kwargs)
 
     def on_port_num(self, *args):
@@ -66,12 +68,10 @@ class VideoWidget(Image):
         """
         try:
             # self._capture = cv2.VideoCapture(self.port_num)
-            self._capture = PiCamera(framerate=30)
-            time.sleep(2)
             self._capture.awb_mode = "incandescent"
             self._capture.set(cv2.CAP_PROP_FRAME_WIDTH, self.camera_width)
             self._capture.set(cv2.CAP_PROP_FRAME_HEIGHT, self.camera_height)
-            self._frame = None
+            # self._frame = None
         except Exception as e:
             Logger.error('KioskVideoWidget: Failed to assign port number - {}'.format(e))
             self._capture = None
