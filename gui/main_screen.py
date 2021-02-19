@@ -26,9 +26,9 @@ class MainScreen(Screen):
 
     def on_enter(self, *args):
         self.ids.video.start()
-        self.db_ret = True
-        self.db_thread = threading.Thread(target=self.save_butt_number)
-        self.db_thread.start()
+        # self.db_ret = True
+        # self.db_thread = threading.Thread(target=self.save_butt_number)
+        # self.db_thread.start()
 
     def on_leave(self, *args):
         self.ids.video.stop()
