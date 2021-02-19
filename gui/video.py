@@ -116,7 +116,7 @@ class VideoWidget(Image):
             else:
                 frame = None
             if self.count_ids % 20 == 0:
-                counted_frame = self.butt_detector.detect_butts(frame=frame, count_ret=True)
+                counted_frame = self.butt_detector.detect_butts(frame=frame)
             else:
                 counted_frame = self.butt_detector.detect_butts(frame=frame)
             # counted_frame = frame
