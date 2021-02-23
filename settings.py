@@ -17,7 +17,9 @@ APP_WIDTH = '800'
 APP_HEIGHT = '400'
 MAIN_SCREEN = "main_screen"
 SHOW_DATABASE = "show_database"
+
 TPU = True
+WEB_CAM = True
 
 HOST_NAME = 'localhost'
 USER_NAME = 'root'

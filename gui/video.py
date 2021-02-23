@@ -11,7 +11,7 @@ from utils.frame_buf import frame_to_buf
 from kivy.uix.image import Image
 from kivy.logger import Logger
 from src.rpi.camera import ButtDetector
-from settings import BAD_FRAME_PATH
+from settings import BAD_FRAME_PATH, WEB_CAM
 
 
 class VideoWidget(Image):
@@ -55,9 +55,12 @@ class VideoWidget(Image):
         self._egg_counter_ret = None
         self.butt_detector = ButtDetector()
         self.count_ids = 0
-        self._capture = PiCamera(framerate=30)
-        time.sleep(2)
-        self._capture.awb_mode = "incandescent"
+        if not WEB_CAM:
+            self._capture = PiCamera(framerate=30)
+            time.sleep(2)
+            self._capture.awb_mode = "incandescent"
+        else:
+            self._capture = cv2.VideoCapture(self.port_num)
         super(VideoWidget, self).__init__(**kwargs)
 
     def on_port_num(self, *args):
@@ -111,8 +114,11 @@ class VideoWidget(Image):
         tmp_path = os.path.join('/tmp', 'temp.jpg')
         try:
             if type(self.port_num) == int:
-                self._capture.capture(tmp_path)
-                frame = cv2.imread(tmp_path)
+                if WEB_CAM:
+                    ret, frame = self._capture.read()
+                else:
+                    self._capture.capture(tmp_path)
+                    frame = cv2.imread(tmp_path)
             else:
                 frame = None
             if self.count_ids % 20 == 0:
